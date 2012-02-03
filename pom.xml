@@ -1,0 +1,125 @@
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.soebes.maven.test</groupId>
+  <artifactId>mappasm-96</artifactId>
+  <packaging>pom</packaging>
+  <version>0.1-SNAPSHOT</version>
+  <name>mappasm-96-test</name>
+  <url>https://github.com/khmarbaise/mappasm-96</url>
+
+  <inceptionYear>2012</inceptionYear>
+
+  <ciManagement>
+    <system>Jenkins</system>
+    <url>http://78.46.16.202:8080/jenkins/</url>
+  </ciManagement>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <properties>
+    <!-- all kind of resources etc. will be UTF-8 encoded -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <developers>
+    <developer>
+      <id>kama</id>
+      <name>Karl Heinz Marbaise</name>
+      <email>khmarbaise@soebes.com</email>
+      <url>http://blog.soebes.de</url>
+      <organization>SoftwareEntwicklung Beratung Schulung</organization>
+      <organizationUrl>http://www.soebes.de</organizationUrl>
+      <roles>
+        <role>lead</role>
+        <role>developer</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:git://github.com/khmarbaise/mappasm-96.git</connection>
+    <developerConnection>scm:git:git@github.com:khmarbaise/mappasm-96.git</developerConnection>
+    <url>https://github.com/khmarbaise/mappasm-96</url>
+  </scm>
+
+
+  <distributionManagement>
+    <repository>
+      <id>local-release</id>
+      <url>http://build:8080/nexus/content/repositories/releases/</url>
+    </repository>
+    <snapshotRepository>
+      <id>local-snapshots</id>
+      <url>http://build:8080/nexus/content/repositories/snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.7</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>appassembler-maven-plugin</artifactId>
+        <version>1.1.1</version>
+        <configuration>
+          <binFileExtensions>
+            <unix>.sh</unix>
+          </binFileExtensions>
+          <generateRepository>false</generateRepository>
+          <repositoryLayout>flat</repositoryLayout>
+          <repositoryName>lib</repositoryName>
+          <configurationDirectory>conf</configurationDirectory>
+          <includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
+          <platforms>
+            <platform>windows</platform>
+            <platform>unix</platform>
+          </platforms>
+        </configuration>
+        <executions>
+          <execution>
+            <id>create-scripts</id>
+            <phase>package</phase>
+            <goals>
+              <goal>assemble</goal>
+            </goals>
+            <configuration>
+              <extraJvmArguments>some args</extraJvmArguments>
+              <programs>
+                <program>
+                  <name>startClient</name>
+                  <mainClass>xxx.yyy.ZZZ</mainClass>
+                </program>
+              </programs>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+
+    </plugins>
+
+  </build>
+
+</project> 
+
+
